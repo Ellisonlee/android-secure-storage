@@ -41,7 +41,7 @@ RxSecureStorage secureStorage =
 ```
 
 The create method takes a `Context` and an alias. An alias can encrypt and decrypt data, another
-alias cannot encrypt/decrypt the same data successfully.
+alias cannot encrypt/decrypt the same data successfully. An alias is **not** a password, think of it as the namae of an entry in a keychain which stores generated encryption keys.
 
 ---
 
