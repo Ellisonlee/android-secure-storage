@@ -41,7 +41,9 @@ RxSecureStorage secureStorage =
 ```
 
 The create method takes a `Context` and an alias. An alias can encrypt and decrypt data, another
-alias cannot encrypt/decrypt the same data successfully. An alias is **not** a password, think of it as the namae of an entry in a keychain which stores generated encryption keys.
+alias cannot encrypt/decrypt the same data successfully. **An alias is not a password**, think of it as the name of an entry in a keychain which stores generated encryption keys.
+
+Using the same alias name across different devices **would not result in shared encryption keys**.
 
 ---
 
@@ -115,3 +117,5 @@ secureStorage
           // preference was changed, here's the latest decryped value
         });
 ```
+
+Retrievla returns an observable, which receives emissions with every put. You should manage the subscription to this observable on your end and unsubscribe when necessary.
