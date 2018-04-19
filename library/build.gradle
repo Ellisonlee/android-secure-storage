@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
 apply from: '../gradle/dependencies.gradle'
 
@@ -29,6 +30,7 @@ dependencies {
 
   testImplementation 'junit:junit:' + versions.junit
   androidTestImplementation 'com.android.support.test:runner:' + versions.testRunner
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 publish {
@@ -39,3 +41,4 @@ publish {
   desc = 'Encrypt and store data using the keystore APIs.'
   website = 'https://github.com/afollestad/android-secure-storage'
 }
+

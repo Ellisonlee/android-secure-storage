@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
   @OnClick(R.id.initialize_button)
   void onClickInitialize() {
-    secureStorage = RxSecureStorage.create(this, inputAliasName.getText().toString().trim());
+    secureStorage = RxSecureStorage.Companion.create(this, inputAliasName.getText().toString().trim());
     buttonEncrypt.setEnabled(true);
     buttonDecrypt.setEnabled(true);
     inputEncrypt.setEnabled(true);
