@@ -1,6 +1,7 @@
 buildscript {
-  ext.kotlin_version = versions.kotlin
   apply from: './gradle/dependencies.gradle'
+  ext.kotlin_version = versions.kotlin
+
   repositories {
     google()
     jcenter()
