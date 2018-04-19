@@ -1,40 +1,41 @@
 apply plugin: 'com.android.library'
-apply from: '../dependencies.gradle'
-
-ext {
-    PUBLISH_GROUP_ID = 'com.afollestad'
-    PUBLISH_ARTIFACT_ID = 'android-secure-storage'
-    PUBLISH_VERSION = versions.publishVersion
-}
+apply plugin: 'com.novoda.bintray-release'
+apply from: '../gradle/dependencies.gradle'
 
 android {
-    compileSdkVersion versions.compileSdk
-    buildToolsVersion versions.buildTools
+  compileSdkVersion versions.compileSdk
+  buildToolsVersion versions.buildTools
 
-    defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.compileSdk
-        versionCode versions.publishVersionCode
-        versionName versions.publishVersion
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+  defaultConfig {
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.compileSdk
+    versionCode versions.publishVersionCode
+    versionName versions.publishVersion
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+  }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:' + versions.supportLib
-    api 'io.reactivex.rxjava2:rxjava:' + versions.rxJava
-    api 'io.reactivex.rxjava2:rxandroid:' + versions.rxAndroid
-    api 'com.f2prateek.rx.preferences2:rx-preferences:' + versions.rxPrefs
+  implementation 'com.android.support:appcompat-v7:' + versions.supportLib
+  api 'io.reactivex.rxjava2:rxjava:' + versions.rxJava
+  api 'io.reactivex.rxjava2:rxandroid:' + versions.rxAndroid
+  api 'com.f2prateek.rx.preferences2:rx-preferences:' + versions.rxPrefs
 
-    testImplementation 'junit:junit:' + versions.junit
-    androidTestImplementation 'com.android.support.test:runner:' + versions.testRunner
+  testImplementation 'junit:junit:' + versions.junit
+  androidTestImplementation 'com.android.support.test:runner:' + versions.testRunner
 }
 
-apply from: 'https://raw.githubusercontent.com/afollestad/aidanfollestad.com/master/android-lib-release.gradle'
+publish {
+  userOrg = 'drummer-aidan'
+  groupId = 'com.afollestad'
+  artifactId = 'android-secure-storage'
+  publishVersion = versions.publishVersion
+  desc = 'Encrypt and store data using the keystore APIs.'
+  website = 'https://github.com/afollestad/android-secure-storage'
+}

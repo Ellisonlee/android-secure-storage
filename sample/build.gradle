@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: '../dependencies.gradle'
+apply from: '../gradle/dependencies.gradle'
 
 android {
     compileSdkVersion versions.compileSdk

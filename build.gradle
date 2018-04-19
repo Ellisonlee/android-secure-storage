@@ -1,40 +1,47 @@
 buildscript {
-    apply from: './dependencies.gradle'
-
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:' + versions.gradlePlugin
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:" + versions.spotlessPlugin
-    }
+  apply from: './gradle/dependencies.gradle'
+  repositories {
+    google()
+    jcenter()
+    maven { url 'https://plugins.gradle.org/m2/' }
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:' + versions.gradlePlugin
+    classpath 'com.diffplug.spotless:spotless-plugin-gradle:' + versions.spotlessPlugin
+    classpath 'com.github.ben-manes:gradle-versions-plugin:' + versions.versionPlugin
+    classpath 'com.novoda:bintray-release:' + versions.bintrayRelease
+  }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+  repositories {
+    google()
+    jcenter()
+  }
 
-    buildscript {
-        repositories {
-            maven { url "https://plugins.gradle.org/m2/" }
-        }
+  apply plugin: 'com.diffplug.gradle.spotless'
+  spotless {
+    java {
+      target '**/*.java'
+      trimTrailingWhitespace()
+      removeUnusedImports()
+      googleJavaFormat()
+      endWithNewline()
+      indentWithSpaces(2)
     }
-
-    apply plugin: "com.diffplug.gradle.spotless"
-    spotless {
-        java {
-            target "**/*.java"
-            trimTrailingWhitespace()
-            removeUnusedImports()
-            googleJavaFormat()
-            endWithNewline()
-        }
-    }
+  }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+apply plugin: 'com.github.ben-manes.versions'
+dependencyUpdates.resolutionStrategy = {
+  componentSelection { rules ->
+    rules.all { ComponentSelection selection ->
+      boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
+        selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+      }
+      if (rejected) {
+        selection.reject('Release candidate')
+      }
+    }
+  }
 }
