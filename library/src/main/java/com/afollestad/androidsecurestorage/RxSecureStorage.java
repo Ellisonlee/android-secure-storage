@@ -258,7 +258,8 @@ public class RxSecureStorage {
         // error in android 6: InvalidKeyException: Need RSA private or public key
         return Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL");
       } else {
-        // error in android 5: NoSuchProviderException: Provider not available: AndroidKeyStoreBCWorkaround
+        // error in android 5: NoSuchProviderException: Provider not available:
+        // AndroidKeyStoreBCWorkaround
         return Cipher.getInstance("RSA/ECB/PKCS1Padding", "AndroidKeyStoreBCWorkaround");
       }
     } catch (Exception exception) {
