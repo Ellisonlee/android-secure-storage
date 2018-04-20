@@ -17,5 +17,5 @@ ext.versions = [
     rxJava            : '2.1.12',
     rxAndroid         : '2.0.1',
     butterknife       : '8.8.1',
-    rxPrefs           : '2.0.0-RC3'
+    rxPrefs           : '2.0.0-RC2'
 ]
