@@ -114,8 +114,8 @@ secureStorage
     .getString("key")
     .subscribe(
         latest -> {
-          // preference was changed, here's the latest decryped value
+          // preference was changed, here's the latest decrypted value
         });
 ```
 
-Retrievla returns an observable, which receives emissions with every put. You should manage the subscription to this observable on your end and unsubscribe when necessary.
+Retrieval returns an observable, which receives emissions with every put. You should manage the subscription to this observable on your end and unsubscribe when necessary.
